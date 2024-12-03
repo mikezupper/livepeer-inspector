@@ -1,12 +1,13 @@
 import React from 'react';
-import { CssBaseline } from '@mui/material';
-import { createRoot } from 'react-dom/client';
-import App from "./App.jsx";
+import {
+    RouterProvider
+} from '@tanstack/react-router'
+import {createRoot} from 'react-dom/client';
+import {router} from "./routes";
 
-    const root = createRoot(document.getElementById('root'));
-    root.render(
-        <React.StrictMode>
-            <CssBaseline />
-            <App/>
-        </React.StrictMode>
-    );
+const rootElement = document.getElementById('root')
+
+if (!rootElement.innerHTML) {
+    const root = createRoot(rootElement)
+    root.render(<RouterProvider router={router} />)
+}
