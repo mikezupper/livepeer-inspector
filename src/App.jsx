@@ -1,13 +1,16 @@
 import React from 'react';
+import {Link, Outlet} from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import {CssBaseline, Stack} from '@mui/material';
-import {Outlet,Link} from "@tanstack/react-router";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import "./App.css"
+
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import "./styles/App.css"
+
+
 const theme = createTheme({
     components: {
         MuiButton: {
@@ -25,7 +28,11 @@ const theme = createTheme({
     },
 });
 
-const App = () => {
+/**
+ * The main App component that provides navigation and renders child routes.
+ * @returns {JSX.Element} The rendered App component.
+ */
+function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
@@ -36,12 +43,12 @@ const App = () => {
                             Orchestrator Performance
                         </Typography>
                         <Stack direction="row" spacing={2}>
-                            <Link to="/" activeOptions={{ exact: true }}>
-                            <Button variant="outlined" color="inherit">
-                                Leaderboard
-                            </Button>
+                            <Link to="/leaderboard">
+                                <Button variant="outlined" color="inherit">
+                                    Leaderboard
+                                </Button>
                             </Link>
-                            <Link to="/stats" activeOptions={{ exact: true }}>
+                            <Link to="/stats">
                                 <Button variant="outlined" color="inherit">
                                     Stats
                                 </Button>
@@ -55,6 +62,6 @@ const App = () => {
             </Container>
         </ThemeProvider>
     );
-};
+}
 
 export default App;
