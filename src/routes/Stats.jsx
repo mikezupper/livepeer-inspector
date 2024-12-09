@@ -160,7 +160,7 @@ function Stats() {
                 },
                 {
                     field: "real_time", headerName: "RealTime", sortable: false, flex: 1, maxWidth: 85,
-                    renderCell: params => (<Typography variant="body2">{params.value}</Typography>)
+                    renderCell: params => (<Typography variant="inherit">{params.value}</Typography>)
                 },
                 {
                     field: "transcode_time", headerName: "Transcode", sortable: false, flex: 1,
@@ -184,7 +184,7 @@ function Stats() {
                 },
                 {
                     field: "segments_received", headerName: "Segments Received", sortable: false, flex: 1,
-                    renderCell: (params) => (<Typography variant="body2">{params.value}/60</Typography>)
+                    renderCell: (params) => (<Typography variant="inherit">{params.value}/60</Typography>)
                 },
             ];
         }

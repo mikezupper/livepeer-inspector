@@ -11,12 +11,28 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
             .then((registration) => {
-                console.log('Service Worker registered:', registration);
+                console.log(`[index] Service Worker registered:`, registration);
             })
             .catch((error) => {
-                console.error('Service Worker registration failed:', error);
+                console.error(`[index] Service Worker registration failed:`, error);
             });
     });
+}
+
+//load reference data
+const leaderboardLoader=async () => {
+    console.log(`[index] leaderboardLoader loading...`);
+    const regions = await DataService.fetchRegions();
+    const pipelines = await DataService.fetchPipelines();
+    console.log(`[index] leaderboardLoader completed.`);
+    return {regions, pipelines};
+}
+
+const statsLoader=async () => {
+    console.log(`[index] statsLoader loading...`);
+    const pipelines = await DataService.fetchPipelines();
+    console.log(`[index] statsLoader completed.`);
+    return {pipelines};
 }
 
 const router = createBrowserRouter(
@@ -25,34 +41,22 @@ const router = createBrowserRouter(
             <Route
                 index
                 element={<Leaderboard />}
-                loader={async () => {
-                    const regions = await DataService.fetchRegions();
-                    const pipelines = await DataService.fetchPipelines();
-                    return {regions, pipelines};
-                }}
+                loader={leaderboardLoader}
+                hydrateFallbackElement={<CircularProgress />}
             />
             <Route
                 path="leaderboard"
                 element={<Leaderboard />}
-                loader={async () => {
-                    const regions = await DataService.fetchRegions();
-                    const pipelines = await DataService.fetchPipelines();
-                    return {regions, pipelines};
-                }}
+                loader={leaderboardLoader}
+                hydrateFallbackElement={<CircularProgress />}
             />
             <Route
                 path="stats"
                 element={<Stats />}
-                loader={async () => {
-                    const pipelines = await DataService.fetchPipelines();
-                    return {pipelines};
-                }}
+                loader={statsLoader}
+                hydrateFallbackElement={<CircularProgress />}
             />
         </Route>
     )
 );
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <Suspense fallback={<CircularProgress />}>
-        <RouterProvider router={router} />
-    </Suspense>
-);
+ReactDOM.createRoot(document.getElementById('root')).render(<RouterProvider router={router} />);
