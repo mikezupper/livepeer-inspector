@@ -192,6 +192,8 @@ function Stats() {
         return {columns, rows};
     };
     const {columns, rows} = prepareDataGrid();
+    const totalRows = (rows || []).length;
+
     return (
         <Box p={3}>
             <Typography variant="h5" gutterBottom>
@@ -266,7 +268,7 @@ function Stats() {
                 <DataGrid
                     rows={rows}
                     columns={columns}
-                    pageSizeOptions={[20]}
+                    pageSizeOptions={[20, totalRows]}
                     initialState={{
                         pagination: {
                             paginationModel: {pageSize: 20, page: 0},

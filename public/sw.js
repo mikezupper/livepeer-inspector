@@ -1,6 +1,6 @@
 importScripts('/js/dexie-4.0.10.min.js');
 
-const CACHE_VERSION = 'v1.2'; // Increment this for each new version
+const CACHE_VERSION = 'v1.3'; // Increment this for each new version
 const STATIC_CACHE = `orch-perf-cache-${CACHE_VERSION}`;
 const DB_VERSION = 1.1; // Increment when upgrading the database schema
 const CACHE_EXPIRATION_TTL_MILLIS = 5 * 60 * 1000; // Example TTL: 5 minutes

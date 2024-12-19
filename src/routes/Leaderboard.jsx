@@ -134,7 +134,7 @@ function Leaderboard() {
             </IconButton>
         );
     }
-
+    const totalRows = (leaderboardData || []).length;
     return (
         <Box p={3}>
             <Typography variant="h5" gutterBottom sx={{mb: 2}}>
@@ -231,7 +231,7 @@ function Leaderboard() {
                             renderCell: renderStatsCell,
                         }
                     ]}
-                    pageSizeOptions={[20]}
+                    pageSizeOptions={[20, totalRows]}
                     initialState={{
                         pagination: {
                             paginationModel: {pageSize: 20, page: 0},
